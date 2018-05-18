@@ -68,7 +68,7 @@ public class TeacherOperationController {
         return ResponseObjectUtil.success(res);
     }
 
-    @PostMapping("/studentScoreList")
+    @PostMapping("/studentScoreList1")
     @ApiOperation(value = "根据班级号得到学生成绩报表" ,notes = "Long sysClass 班级号")
     public ResponseObject<PageInfo<StudentRScoreRes>> studentScoreList(Long sysClass, PageRequestBean requestBean) {
         PageInfo<StudentRScoreRes> res = teacherOperationService.studentScoreList(sysClass, requestBean);

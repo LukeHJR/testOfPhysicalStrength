@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8" />
-		<title>大学生运动管理信息系统</title>
+		<title>大学生体测管理信息系统</title>
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,9 @@
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 		<script src="assets/js/ace-extra.min.js"></script>
 		<style>
+			.page-content .left img {
+				width: 100%;
+			}
 			/*弹框*/
 			html{height: 100%;}
 			body{position: relative;height: 100%;}
@@ -39,7 +42,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							大学生运动管理信息系统
+							大学生体测管理信息系统
 						</small>
 					</a>
 				</div>
@@ -59,10 +62,9 @@
 
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<div class="col-sm-offset-2 col-sm-10">
-										<i class="icon-off"></i>
-										<button type="button" onclick="logout()" class="btn btn-default">退出</button>
-									</div>
+									<a href="login.html">
+										<i class="icon-off"></i> 退出
+									</a>
 								</li>
 							</ul>
 						</li>
@@ -87,7 +89,6 @@
 				<a class="menu-toggler" id="menu-toggler" href="#">
 					<span class="menu-text"></span>
 				</a>
-
 				<!--左侧导航 Begin-->
 				<div class="sidebar" id="sidebar">
 					<script type="text/javascript">
@@ -103,89 +104,72 @@
 								<span class="menu-text">首页</span>
 							</a>
 						</li>
-
-						<li class="active">
-							<a href="project.html">
-								<i class="icon-text-width"></i>
-								<span class="menu-text">项目管理</span>
-							</a>
-						</li>
-
+						
+						<!--管理员 Begin-->
 						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-desktop"></i>
-								<span class="menu-text">成绩查询</span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="search_person.html">
-										<i class="icon-double-angle-right"></i> 个人查询
-									</a>
-								</li>
-
-								<li>
-									<a href="search_school.html">
-										<i class="icon-double-angle-right"></i> 院系查询
-									</a>
-								</li>
-							</ul>
-						</li>
-
-						<li>
-							<a href="#" class="dropdown-toggle">
+							<a href="mst_msglist.html">
 								<i class="icon-list"></i>
-								<span class="menu-text">学生报名管理</span>
-
-								<b class="arrow icon-angle-down"></b>
+								<span class="menu-text">信息列表-管理员</span>
 							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="enter.html">
-										<i class="icon-double-angle-right"></i> 报名
-									</a>
-								</li>
-
-								<li>
-									<a href="enter_msg.html">
-										<i class="icon-double-angle-right"></i> 报名信息查询
-									</a>
-								</li>
-							</ul>
 						</li>
-
+						<!--管理员 End-->
+						
+						<!--学生 Begin-->
 						<li>
-							<a href="addscore.html" class="dropdown-toggle">
-								<i class="icon-edit"></i>
-								<span class="menu-text">成绩录入</span>
+							<a href="stu_search.html">
+								<i class="icon-search nav-search-icon"></i>
+								<span class="menu-text">成绩查询-学生</span>
 							</a>
 						</li>
-
+						
 						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-edit"></i>
-								<span class="menu-text">权限管理</span>
-
-								<b class="arrow icon-angle-down"></b>
+							<a href="stu_order.html">
+								<i class="icon-calendar"></i>
+								<span class="menu-text">体测预约-学生</span>
 							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="adduser.html">
-										<i class="icon-double-angle-right"></i> 添加用户
-									</a>
-								</li>
-
-								<li>
-									<a href="usermsg.html">
-										<i class="icon-double-angle-right"></i> 用户权限
-									</a>
-								</li>
-							</ul>
 						</li>
+						<li>
+							<a href="stu_apply.html">
+								<i class="icon-edit"></i>
+								<span class="menu-text">申请补考-学生</span>
+							</a>
+						</li>
+						<li>
+							<a href="stu_except.html">
+								<i class=" icon-exclamation-sign"></i>
+								<span class="menu-text">缓测、免测-学生</span>
+							</a>
+						</li>
+						<!--学生 End-->
+						
+						<!--老师 Begin-->
+						<li class="active">
+							<a href="ter_mngscore.html">
+								<i class="icon-cogs"></i>
+								<span class="menu-text">成绩管理-老师</span>
+							</a>
+						</li>
+						
+						<li>
+							<a href="ter_advice.html">
+								<i class="icon-tasks"></i>
+								<span class="menu-text">体测建议-老师</span>
+							</a>
+						</li>
+						<li>
+							<a href="ter_mngtext.html">
+								<i class="icon-group"></i>
+								<span class="menu-text">体测管理-老师</span>
+							</a>
+						</li>
+						<li>
+							<a href="str_notice.html">
+								<i class=" icon-bullhorn"></i>
+								<span class="menu-text">公告管理-老师</span>
+							</a>
+						</li>
+						<!--老师 End-->
+						
 					</ul>
 					<!-- /.nav-list -->
 				</div>
@@ -207,6 +191,7 @@
 								<a href="index.html" class="active">首页</a>
 							</li>
 						</ul>
+
 					</div>
 					<!--面包屑导航 End-->
 
@@ -214,22 +199,42 @@
 					<div class="page-content">
 						<div class="row">
 							<div class="col-xs-12">
-								<h3 class="smaller lighter blue">
-									运动会项目管理 
-									<button class="btn btn-info dialogalert" style="float: right;">
+								<h3 class="header smaller lighter blue">
+									成绩管理
+								</h3>
+								<!--输入框 Begin-->
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>
+
+										<div class="col-sm-5">
+											<input type="text" id="form-field-1" class="col-xs-10 col-sm-11" />
+										</div>
+										
+										<div class="col-sm-4">
+											<button class="btn btn-white">
+												查询
+											</button>
+										</div>
+										
+									</div>
+								</form>
+								<!--输入框 End-->
+								
+								<!--查询后显示 Begin-->
+								<button class="btn btn-info dialogalert" style="float: right;">
 										添加
 										<i class="icon-print  align-top bigger-125 icon-on-right"></i>
 									</button>
-								</h3>
-								
 								<div class="table-responsive">
 									<table id="sample-table-2" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th>序号</th>
+												<th>班级</th>
+												<th>姓名</th>
+												<th>学号</th>
 												<th>项目</th>
-												<th class="hidden-480">级别</th>
-												<th>学分</th>
+												<th class="hidden-480">分数</th>
 												<th>修改</th>
 												<th>删除</th>
 											</tr>
@@ -243,6 +248,7 @@
 												<td>扔手雷</td>
 												<td class="hidden-480">校级</td>
 												<td>2</td>
+												<td>18</td>
 												<td class="hidden-480">
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
 														<a class="green" href="#">
@@ -266,6 +272,7 @@
 												<td>扔手雷</td>
 												<td class="hidden-480">校级</td>
 												<td>2</td>
+												<td>18</td>
 												<td class="hidden-480">
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
 														<a class="green" href="#">
@@ -289,6 +296,32 @@
 												<td>扔手雷</td>
 												<td class="hidden-480">校级</td>
 												<td>2</td>
+												<td>18</td>
+												<td class="hidden-480">
+													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
+														<a class="green" href="#">
+															<i class="icon-pencil bigger-130"></i>
+														</a>
+													</div>
+												</td>
+												<td>
+													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+														<a class="red" href="#">
+															<i class="icon-trash bigger-130"></i>
+														</a>
+													</div>
+												</td>
+											</tr>
+											
+											
+											<tr>
+												<td class="center">
+													<a href="#">1</a>
+												</td>
+												<td>扔手雷</td>
+												<td class="hidden-480">校级</td>
+												<td>2</td>
+												<td>18</td>
 												<td class="hidden-480">
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
 														<a class="green" href="#">
@@ -312,6 +345,30 @@
 												<td>扔手雷</td>
 												<td class="hidden-480">校级</td>
 												<td>2</td>
+												<td>18</td>
+												<td class="hidden-480">
+													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
+														<a class="green" href="#">
+															<i class="icon-pencil bigger-130"></i>
+														</a>
+													</div>
+												</td>
+												<td>
+													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+														<a class="red" href="#">
+															<i class="icon-trash bigger-130"></i>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="center">
+													<a href="#">1</a>
+												</td>
+												<td>扔手雷</td>
+												<td class="hidden-480">校级</td>
+												<td>2</td>
+												<td>18</td>
 												<td class="hidden-480">
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
 														<a class="green" href="#">
@@ -335,6 +392,7 @@
 												<td>扔手雷</td>
 												<td class="hidden-480">校级</td>
 												<td>2</td>
+												<td>18</td>
 												<td class="hidden-480">
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
 														<a class="green" href="#">
@@ -358,6 +416,7 @@
 												<td>扔手雷</td>
 												<td class="hidden-480">校级</td>
 												<td>2</td>
+												<td>18</td>
 												<td class="hidden-480">
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
 														<a class="green" href="#">
@@ -381,6 +440,7 @@
 												<td>扔手雷</td>
 												<td class="hidden-480">校级</td>
 												<td>2</td>
+												<td>18</td>
 												<td class="hidden-480">
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
 														<a class="green" href="#">
@@ -400,6 +460,7 @@
 										</tbody>
 									</table>
 								</div>
+								<!--查询后显示 End-->
 							</div>
 						</div>
 					</div>
@@ -420,6 +481,15 @@
 									<div class="space-4"></div>
 									
 									<div class="form-group">
+										<label class="col-sm-5 control-label no-padding-right" for="form-field-1">序号：</label>
+
+										<div class="col-sm-6">
+											<input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									
+									<div class="form-group">
 										<label class="col-sm-5 control-label no-padding-right" for="form-field-1">项目：</label>
 
 										<div class="col-sm-6">
@@ -428,22 +498,12 @@
 									</div>
 
 									<div class="space-4"></div>
-
+									
 									<div class="form-group">
-										<label class="col-sm-5 control-label no-padding-right" for="form-field-2">级别：</label>
+										<label class="col-sm-5 control-label no-padding-right" for="form-field-1">学分：</label>
 
 										<div class="col-sm-6">
-											<input type="password" id="form-field-2" placeholder="" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-5 control-label no-padding-right" for="form-field-2">学分：</label>
-
-										<div class="col-sm-6">
-											<input type="password" id="form-field-2" placeholder="" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 
@@ -472,36 +532,12 @@
 			</div>
 		</div>
 		<!--弹框 End-->
-		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "script>");
 		</script>
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
-		</script>
-		<script type="text/javascript">
-            function logout() {
-                $.ajax({
-                    //几个参数需要注意一下
-                    type: "POST",//方法类型
-                    contentType: "application/json",
-                    dataType: "json",//预期服务器返回的数据类型
-                    url: "/user/logout",//url
-                    async: false,
-                    success: function (result) {
-                        // console.log(result);//打印服务端返回的数据(调试用)
-                        if (result) {
-                            alert("成功退出！");
-                            window.location.href = "/static/login.html";//你可以跟换里面的网址，以便成功后跳转
-                        }
-                        ;
-                    },
-                    error: function () {
-                        alert("异常！");
-                    }
-                });
-            }
 		</script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/typeahead-bs2.min.js"></script>
