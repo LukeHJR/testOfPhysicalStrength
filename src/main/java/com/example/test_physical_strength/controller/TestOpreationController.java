@@ -37,9 +37,9 @@ public class TestOpreationController {
     @Autowired
     private TestOpreationService testOpreationService;
 
-    @PostMapping("/modifyUserInfo")
+    @PostMapping("/searchScore")
     @ApiOperation(value = "修改信息")
-    public ResponseObject<List<StudentScoreRes>> modifyUserInfo(HttpServletRequest request) {
+    public ResponseObject<List<StudentScoreRes>> searchScore(HttpServletRequest request) {
         SysUser sysUser = sessionService.getManager(request);
         Long id = sysUser.getId();
         List<StudentScoreRes> res = testOpreationService.searchScore(id);

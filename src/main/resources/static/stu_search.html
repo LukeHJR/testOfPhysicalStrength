@@ -22,6 +22,7 @@
 	</head>
 
 	<body>
+		<div class="content-box" id="appscoreList">
 		<!--头部 Begin-->
 		<div class="navbar navbar-default" id="navbar">
 			<script type="text/javascript">
@@ -56,7 +57,8 @@
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
 									<a href="login.html">
-										<i class="icon-off"></i> 退出
+										<i class="icon-off"></i>                                 <button type="button" onclick="logout()" class="btn btn-default">退出</button>
+
 									</a>
 								</li>
 							</ul>
@@ -196,7 +198,7 @@
 									个人成绩查询
 								</h3>-->
 								<!--输入框 Begin-->
-								<!--<form class="form-horizontal" role="form">
+								<!-- <form class="form-horizontal" role="form">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">学号：</label>
 
@@ -211,7 +213,7 @@
 										</div>
 										
 									</div>
-								</form>-->
+								</form> -->
 								<!--输入框 End-->
 								
 								<!--查询后显示 Begin-->
@@ -219,75 +221,21 @@
 									<table id="sample-table-2" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th>年纪</th>
-												<th>项目</th>
-												<th>分数</th>
-												<th class="hidden-480">建议</th>
+												<th>姓名</th>
+												<th>锻炼意见</th>
+												<th>个人成绩</th>
+												<th>项目id</th>
+							
 											</tr>
 										</thead>
 										
 										<tbody>
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">60</td>
-												<th class="hidden-480">-</th>
-											</tr>
-
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>长跑</td>
-												<td class="hidden-480">40</td>
-												<th class="hidden-480">需要加强耐力</th>
-											</tr>
 											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">60</td>
-												<th class="hidden-480">-</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">60</td>
-												<th class="hidden-480">-</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">60</td>
-												<th class="hidden-480">-</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">60</td>
-												<th class="hidden-480">-</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">60</td>
-												<th class="hidden-480">-</th>
+											<tr v-for="item in searchScore">
+												<td>{{(item.name)}}</td>
+												<td>{{(item.advice)}}</td>
+												<td>{{(item.achievement)}}</td>
+												<td>{{(item.sysProjectId)}}</td>
 											</tr>
 											
 										</tbody>
@@ -310,6 +258,73 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
 		</script>
+<script type="text/javascript">
+    function logout() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8031/user/logout",//url
+            async: false,
+            success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                if (result) {
+                    alert("成功退出！");
+                    window.location.href = "http://localhost:8080/test_physical_strength/src/main/resources/static/login.html";//你可以跟换里面的网址，以便成功后跳转
+                }
+                ;
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+	
+var searchScore = new Vue({
+	el:'#appscoreList',
+	data: {
+		name: null,
+		sysProjectId: null,
+		achievement: null,
+        advice: null
+	},
+	methods: {
+		//客户列表
+		getsearchScore: function(data,page){
+			var self = this;
+            data.pageNum = page || 1;
+			$.ajax({
+				type: 'post',
+				dataType: 'JSON',
+				data: data,
+				 url: "http://localhost:8031/TestOpreationController/searchScore",
+				success: function(result){
+					self.searchScore = result.data.list;
+					$("#pagination").empty().createPage({
+                        pageCount: result.data.pages,
+                        current: page,
+                        backFn:function(p){
+                            self.searchScore(data,p);
+                        }
+                    });
+				}
+			})
+		},
+
+	created: function(){
+        this.searchScore({
+            pageSize: 10,
+        });
+    }
+});
+</script>
+
+		<script src="assets/js/jquery.page.min.js"></script>
+		<script src="assets/js/vue.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/typeahead-bs2.min.js"></script>
 		<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -323,6 +338,7 @@
 		<script src="assets/js/ace-elements.min.js"></script>
 		<script src="assets/js/ace.min.js"></script>
 		<script src="assets/js/index.js"></script>
+	</div>
 	</body>
 
 </html>

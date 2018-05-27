@@ -40,18 +40,19 @@
 
 											<div class="space-6"></div>
 
-											<form>
+											<form id="infoForm" method="post"  class="form-inline" role="form"
+                                          enctype="multipart/form-data">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="学号" />
+															<input name="sid" id="sid" type="text" class="form-control" placeholder="学号" />
 															<i class="icon-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
+															<input name="password" id="password" type="password" class="form-control" placeholder="密码" />
 															<i class="icon-lock"></i>
 														</span>
 													</label>
@@ -64,10 +65,12 @@
 															<span class="lbl">记住</span>
 														</label>
 
-														<button type="button" class="width-35 pull-right btn btn-sm btn-primary">
-															<i class="icon-key"></i>
-															登录
-														</button>
+														<button type="button"
+                                                        class="width-35 pull-right btn btn-sm btn-primary"
+                                                        onclick="login()">
+                                                    <i class="icon-key"></i>
+                                                    登录
+                                                </button>
 													</div>
 
 													<div class="space-4"></div>
@@ -100,25 +103,47 @@
 
 											<div class="space-6"></div>
 
-											<form>
+											<form id="infoForm1" method="post"  class="form-inline" role="form"
+                                          enctype="multipart/form-data"> 
 												<fieldset>
+
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="学号" />
+															<input name="name"  id= "name" type="text" class="form-control" placeholder="姓名" />
 															<i class="icon-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
+															<input name="sysGrade" id="sysGrade" type="text" class="form-control" placeholder="年纪id" />
+															<i class="icon-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input name="sysClass" id="sysClass" type="text" class="form-control" placeholder="班级号" />
+															<i class="icon-user"></i>
+														</span>
+													</label>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input name="sid" id="sid" type="text" class="form-control" placeholder="学号" />
+															<i class="icon-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input name="password" id="password" type="password" class="form-control" placeholder="密码" />
 															<i class="icon-lock"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="确认密码" />
+															<input name="rePassword" id="rePassword" type="rePassword" class="form-control" placeholder="确认密码" />
 															<i class="icon-retweet"></i>
 														</span>
 													</label>
@@ -131,10 +156,12 @@
 															重置
 														</button>
 
-														<button type="button" class="width-65 pull-right btn btn-sm btn-success">
-															注册
-															<i class="icon-arrow-right icon-on-right"></i>
-														</button>
+														 <button type="button"
+                                                        class="width-65 pull-right btn btn-sm btn-success"
+                                                        onclick="regist()">
+                                                    注册
+                                                    <i class="icon-arrow-right icon-on-right"></i>
+                                                </button>
 													</div>
 												</fieldset>
 											</form>
@@ -168,6 +195,59 @@
 			 jQuery('#'+id).addClass('visible');
 			}
 		</script>
-	
+	<script type="text/javascript">
+    var host = "localhost:8031"
+    function login() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            // contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+            // url: host + "/sports/src/main/resources/user/login",//url. SysController
+            url: "http://localhost:8031/user/login",
+            // url: host +"/sports/src/main/resources/user/login",
+            data: $('#infoForm').serialize(),
+            async: false,
+            success: function (result) {
+                if (result.httpStatus == 200) {
+                    alert("欢迎登陆大学生体测管理信息系统");
+                    window.location.href = "http://localhost:8080/test_physical_strength/src/main/resources/static/index.html";
+                }
+                ;
+            },
+            error: function () {
+                alert("请确定您的登陆信息！");
+                // window.location.href = "/static/login.html";
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+	var host = "localhost:8031"
+    function regist() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            // contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8031/user/regist",//url
+            // url: 'http://localhost:8030/user/regist',
+            data: $('#infoForm1').serialize(),
+            async: false,
+            success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                if (result.httpStatus == 200) {
+                    alert("注册成功！");
+                    window.location.href = "http://localhost:8080/test_physical_strength/src/main/resources/static/login.html";//你可以跟换里面的网址，以便成功后跳转
+                }
+                ;
+            },
+            error: function () {
+                alert("请输入正确的注册信息！");
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -56,7 +56,8 @@
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
 									<a href="login.html">
-										<i class="icon-off"></i> 退出
+										<i class="icon-off"></i>                                 <button type="button" onclick="logout()" class="btn btn-default">退出</button>
+
 									</a>
 								</li>
 							</ul>
@@ -190,6 +191,10 @@
 
 					<!--内容 Begin-->
 					<div class="page-content">
+						<div class="banner">
+							<h2 class="center blue" style="line-height: 50px;">欢迎来到中北大学体测管理系统!</h2>
+							<img src="assets/images/banner.jpg" style="width: 100%;" alt="" />
+						</div>
 						<!--公告 Begin-->
 						<div id="timeline-1">
 							<div class="row" style="margin-top: 30px;">
@@ -429,6 +434,30 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
 		</script>
+
+		<script type="text/javascript">
+    function logout() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8031/user/logout",//url
+            async: false,
+            success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                if (result) {
+                    alert("成功退出！");
+                    window.location.href = "http://localhost:8080/test_physical_strength/src/main/resources/static/login.html";//你可以跟换里面的网址，以便成功后跳转
+                }
+                ;
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    }
+</script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/typeahead-bs2.min.js"></script>
 		<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>

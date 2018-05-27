@@ -197,9 +197,10 @@
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
 
-								<form class="form-horizontal" role="form">
+								<form id="infoForm1" method="post"  class="form-inline" role="form"
+                                          enctype="multipart/form-data">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">标题：</label>
+										<label name="title" id="title" class="col-sm-3 control-label no-padding-right" for="form-field-2">标题：</label>
 
 										<div class="col-sm-6">
 											<input type="password" id="form-field-2" placeholder="" class="col-xs-10 col-sm-8" />
@@ -209,7 +210,7 @@
 									<div class="space-4"></div>
 									
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-0">内容：</label>
+										<label name="content" id="content" class="col-sm-3 control-label no-padding-right" for="form-field-0">内容：</label>
 
 										<div class="col-sm-6">
 											<textarea name="" class="col-xs-10 col-sm-8" style="resize:none;height:150px;"></textarea>
@@ -220,7 +221,7 @@
 								
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="button">
+											<button class="btn btn-info" type="button" onclick="indexAddInfo()">
 												<i class="icon-ok bigger-110"></i>
 												发布
 											</button>
@@ -252,6 +253,37 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
 		</script>
+
+
+		<script type="text/javascript">
+	var host = "localhost:8031"
+    function regist() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            // contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8031/indexInfoController/indexAddInfo",//url
+            // url: 'http://localhost:8030/user/regist',
+            data: $('#infoForm1').serialize(),
+            async: false,
+            success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                if (result.httpStatus == 200) {
+                    alert("发布成功！");
+                    window.location.href = "http://localhost:8080/test_physical_strength/src/main/resources/static/index.html";//你可以跟换里面的网址，以便成功后跳转
+                }
+                ;
+            },
+            error: function () {
+                alert("请输入正确的注册信息！");
+            }
+        });
+    }
+</script>
+
+		<script src="assets/js/jquery.page.min.js"></script>
+		<script src="assets/js/vue.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/typeahead-bs2.min.js"></script>
 		<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>

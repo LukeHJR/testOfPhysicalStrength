@@ -22,6 +22,7 @@
 	</head>
 
 	<body>
+		<div class="content-box" id="appTestList">
 		<!--头部 Begin-->
 		<div class="navbar navbar-default" id="navbar">
 			<script type="text/javascript">
@@ -56,7 +57,9 @@
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
 									<a href="login.html">
-										<i class="icon-off"></i> 退出
+										<i class="icon-off"></i> 
+										                                <button type="button" onclick="logout()" class="btn btn-default">退出</button>
+
 									</a>
 								</li>
 							</ul>
@@ -198,115 +201,45 @@
 										<thead>
 											<tr>
 												<th>序号</th>
-												<th class="hidden-480">学号</th>
+												<th class="hidden-480">项目id</th>
+												<th>班级id</th>
 												<th>姓名</th>
-												<th>年纪</th>
-												<th>项目</th>
-												<th>申请</th>
-												<th>申请原因</th>
-												<th>意见</th>
-												<th>备注</th>
+												<th>类型</th>
+												<th>预约时间</th>
+												<th>类型</th>
+												<th>预约人数</th>
+												<th>审核状态</th>
+												<th></th>
+												<th></th>
 											</tr>
 										</thead>
 										
 										<tbody>
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120108</td>
-												<td>张三</td>
-												<td>一年纪</td>
-												<td>长跑</td>
-												<td class="hidden-480">免测</td>
-												<td>心脏病</td>
-												<td><button class="btn btn-success">通过</button>  <button class="btn btn-danger">不通过</button></td>
-												<td class="reason"></td>
-											</tr>
+											<tr v-for="item in appTestList">
+											<td>{{(item.id)}}</td>
+											<td>{{item.sysProjectId}}</td>
+											<td>{{item.sysClass}}</td>
+											<td v-if="item.type==1">体测预约</td>
+											<td v-if="item.type==2">补考</td>
+											<td v-if="item.type==3">缓测</td>
+											<td v-if="item.type==4">免测</td>
 
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120108</td>
-												<td>张三</td>
-												<td>一年纪</td>
-												<td>长跑</td>
-												<td class="hidden-480">免测</td>
-												<td>心脏病</td>
-												<td><button class="btn btn-success">通过</button>  <button class="btn btn-danger">不通过</button></td>
-												<td class="reason"></td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120108</td>
-												<td>张三</td>
-												<td>一年纪</td>
-												<td>长跑</td>
-												<td class="hidden-480">免测</td>
-												<td>心脏病</td>
-												<td><button class="btn btn-success">通过</button>  <button class="btn btn-danger">不通过</button></td>
-												<td class="reason"></td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120108</td>
-												<td>张三</td>
-												<td>一年纪</td>
-												<td>长跑</td>
-												<td class="hidden-480">免测</td>
-												<td>心脏病</td>
-												<td><button class="btn btn-success">通过</button>  <button class="btn btn-danger">不通过</button></td>
-												<td class="reason"></td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120108</td>
-												<td>张三</td>
-												<td>一年纪</td>
-												<td>长跑</td>
-												<td class="hidden-480">免测</td>
-												<td>心脏病</td>
-												<td><button class="btn btn-success">通过</button>  <button class="btn btn-danger">不通过</button></td>
-												<td class="reason"></td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120108</td>
-												<td>张三</td>
-												<td>一年纪</td>
-												<td>长跑</td>
-												<td class="hidden-480">免测</td>
-												<td>心脏病</td>
-												<td><button class="btn btn-success">通过</button>  <button class="btn btn-danger">不通过</button></td>
-												<td class="reason"></td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120108</td>
-												<td>张三</td>
-												<td>一年纪</td>
-												<td>长跑</td>
-												<td class="hidden-480">免测</td>
-												<td>心脏病</td>
-												<td><button class="btn btn-success">通过</button>  <button class="btn btn-danger">不通过</button></td>
-												<td class="reason"></td>
-											</tr>
+											<td>{{item.advice}}</td>
+
+											<td v-if="item.typeStatus==1">班级</td>
+											<td v-if="item.typeStatus==2">个人</td>
+											<td>{{item.studentNum}}</td>
+											<td v-if="item.status==0">待审核</td>
+											<td v-if="item.status==1">审核通过</td>
+											<td v-if="item.status==2">不同意</td>
+											<td>
+												<a class="pointer btn btn-primary" data-toggle="modal" data-target="#msgPaySet" @click="checkStatusOK(item)">审核通过</a>
+											</td>
+											<td>
+												<a class="pointer btn btn-primary" data-toggle="modal" data-target="#msgPaySet" @click="checkStatus(item)">审核不通过</a>
+											</td>
+													
+										</tr>
 											
 										</tbody>
 									</table>
@@ -326,6 +259,110 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
 		</script>
+
+<script type="text/javascript">
+    function logout() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8031/user/logout",//url
+            async: false,
+            success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                if (result) {
+                    alert("成功退出！");
+                    window.location.href = "http://localhost:8080/test_physical_strength/src/main/resources/static/login.html";//你可以跟换里面的网址，以便成功后跳转
+                }
+                ;
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+	
+var appCustomerList = new Vue({
+	el:'#appTestList',
+	data: {
+		id: null,
+		sysProjectId: null,
+		sysClass: null,
+		type: null,
+        advice: null,
+		typeStatus: 0,
+		studentNum: 0,
+		status: 0
+	},
+	methods: {
+		//客户列表
+		getstudentTestList: function(data,page){
+			var self = this;
+            data.pageNum = page || 1;
+			$.ajax({
+				type: 'post',
+				dataType: 'JSON',
+				data: data,
+				 url: "http://localhost:8031/teacherOperationController/studentTestList",
+				success: function(result){
+					self.studentTestList = result.data.list;
+					$("#pagination").empty().createPage({
+                        pageCount: result.data.pages,
+                        current: page,
+                        backFn:function(p){
+                            self.getstudentTestList(data,p);
+                        }
+                    });
+				}
+			})
+		},
+
+		checkStatusOK: function(item){
+			var self = this;
+			self.id = item.id;
+			self.type = 1;
+			self.getcheckStatus(self.id,self.type);
+		},
+
+
+		checkStatus: function(item){
+			var self = this;
+			self.id = item.id;
+			self.type = 2;
+			self.getcheckStatus(self.id,self.type);
+		},
+
+getcheckStatus: function(id,type){
+			var self = this;
+			$.ajax({
+				type: 'post',
+				data: {
+					Id: id,
+					type: type
+				},
+				url: "http://localhost:8031/teacherOperationController/checkStatus",
+				success:function(result){
+					 alert("OK");
+				}
+			})
+		},
+	},
+
+	created: function(){
+        this.getstudentTestList({
+            pageSize: 10,
+        });
+    }
+});
+
+
+</script>
+		<script src="assets/js/jquery.page.min.js"></script>
+		<script src="assets/js/vue.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/typeahead-bs2.min.js"></script>
 		<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -349,6 +386,8 @@
 				$(this).siblings('button').css({'display':'none'})
 			})
 		</script>
+
+	</div>
 	</body>
 
 </html>

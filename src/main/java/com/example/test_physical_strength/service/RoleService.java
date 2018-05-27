@@ -39,4 +39,13 @@ public interface RoleService {
      * @date 2018年5月12日
      */
     void modifyUserInfo(UserRequest request);
+
+    /**
+     * @param
+     * @return
+     * @title delete
+     * @author huangjiarui
+     * @date 2018年5月12日
+     */
+    void delete(Long id);
 }

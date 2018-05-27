@@ -29,6 +29,8 @@
 	</head>
 
 	<body>
+				<div class="content-box" id="appsList">
+
 		<!--头部 Begin-->
 		<div class="navbar navbar-default" id="navbar">
 			<script type="text/javascript">
@@ -63,7 +65,8 @@
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
 									<a href="login.html">
-										<i class="icon-off"></i> 退出
+										<i class="icon-off"></i>                                 <button type="button" onclick="logout()" class="btn btn-default">退出</button>
+
 									</a>
 								</li>
 							</ul>
@@ -203,22 +206,40 @@
 									成绩管理
 								</h3>
 								<!--输入框 Begin-->
-								<form class="form-horizontal" role="form">
+								<!-- <form class="form-horizontal" role="form">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1">学号：</label>
 
-										<div class="col-sm-5">
-											<input type="text" id="form-field-1" class="col-xs-10 col-sm-11" />
+										<div class="col-sm-1">
+											<input type="text" id="form-field-1" class="col-xs-12 col-sm-12" />
 										</div>
 										
-										<div class="col-sm-4">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1">姓名：</label>
+
+										<div class="col-sm-1">
+											<input type="text" id="form-field-1" class="col-xs-12 col-sm-12" />
+										</div>
+										
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1">班级：</label>
+
+										<div class="col-sm-2">
+											<input type="text" id="form-field-1" class="col-xs-12 col-sm-12" />
+										</div>
+										
+										<label class="col-sm-2 control-label no-padding-right" for="form-field-1">考试项目：</label>
+
+										<div class="col-sm-2">
+											<input type="text" id="form-field-1" class="col-xs-12 col-sm-12" />
+										</div>
+										
+										<div class="col-sm-1">
 											<button class="btn btn-white">
 												查询
 											</button>
 										</div>
 										
 									</div>
-								</form>
+								</form> -->
 								<!--输入框 End-->
 								
 								<!--查询后显示 Begin-->
@@ -230,25 +251,23 @@
 									<table id="sample-table-2" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th>班级</th>
+												<th>学生id</th>
 												<th>姓名</th>
-												<th>学号</th>
-												<th>项目</th>
-												<th class="hidden-480">分数</th>
+												<th>锻炼意见</th>
+												<th>个人成绩</th>
+												<th>项目id</th>					
 												<th>修改</th>
 												<th>删除</th>
 											</tr>
 										</thead>
 										
-										<tbody>
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
+										<tbody> <tr v-for="item in studentScoreList">
+											<td>{{(item.sysUserStudentId)}}</td>
+											<td>{{item.name}}</td>
+											<td>{{item.advice}}</td>
+											<td>{{item.achievement}}</td>
+											<td>{{item.sysProjectId}}</td>
+
 												<td class="hidden-480">
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
 														<a class="green" href="#">
@@ -258,204 +277,15 @@
 												</td>
 												<td>
 													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
+														<a class="red" href="#"> 
+															<button type="button"@click="delet1(item) class="btn btn-default"></button>
 															<i class="icon-trash bigger-130"></i>
 														</a>
 													</div>
 												</td>
 											</tr>
 
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
-												<td class="hidden-480">
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-													</div>
-												</td>
-												<td>
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
-												<td class="hidden-480">
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-													</div>
-												</td>
-												<td>
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
-											
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
-												<td class="hidden-480">
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-													</div>
-												</td>
-												<td>
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
-												<td class="hidden-480">
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-													</div>
-												</td>
-												<td>
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
-												<td class="hidden-480">
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-													</div>
-												</td>
-												<td>
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
-												<td class="hidden-480">
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-													</div>
-												</td>
-												<td>
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
-												<td class="hidden-480">
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-													</div>
-												</td>
-												<td>
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>扔手雷</td>
-												<td class="hidden-480">校级</td>
-												<td>2</td>
-												<td>18</td>
-												<td class="hidden-480">
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons dialogalert">
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-													</div>
-												</td>
-												<td>
-													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
+										
 											
 										</tbody>
 									</table>
@@ -477,11 +307,11 @@
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
 
-								<form class="form-horizontal" role="form">
+								<form class="form-horizontal" role="form" id="modifyScore">
 									<div class="space-4"></div>
 									
 									<div class="form-group">
-										<label class="col-sm-5 control-label no-padding-right" for="form-field-1">序号：</label>
+										<label name="sysUserStudentId" id="sysUserStudentId" class="col-sm-5 control-label no-padding-right" for="form-field-1">学生id：</label>
 
 										<div class="col-sm-6">
 											<input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-5" />
@@ -489,18 +319,10 @@
 									</div>
 									<div class="space-4"></div>
 									
-									<div class="form-group">
-										<label class="col-sm-5 control-label no-padding-right" for="form-field-1">项目：</label>
-
-										<div class="col-sm-6">
-											<input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
+								
 									
 									<div class="form-group">
-										<label class="col-sm-5 control-label no-padding-right" for="form-field-1">学分：</label>
+										<label name="achievement" id="achievement" class="col-sm-5 control-label no-padding-right" for="form-field-1">成绩：</label>
 
 										<div class="col-sm-6">
 											<input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-5" />
@@ -511,7 +333,7 @@
 								
 									<div class="clearfix form-actions" style="margin-top: 70px;">
 										<div class="col-md-offset-4 col-sm-offset-4 col-md-7 col-sm-7">
-											<button class="btn btn-info btn_sub" type="button">
+											<button class="btn btn-info btn_sub" type="button" onclick="modifyScore()">
 												<i class="icon-ok bigger-110"></i>
 												提交
 											</button>
@@ -539,6 +361,121 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
 		</script>
+<script type="text/javascript">
+    function modifyScore() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+             data: $('#modifyScore').serialize(),
+
+           url: "http://localhost:8031/teacherOperationController/modifyScore",//url
+            async: false,
+            success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                if (result) {
+                    alert("修改成功！");
+                   
+                }
+                ;
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function logout() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8031/user/logout",//url
+            async: false,
+            success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                if (result) {
+                    alert("成功退出！");
+                    window.location.href = "http://localhost:8080/test_physical_strength/src/main/resources/static/login.html";//你可以跟换里面的网址，以便成功后跳转
+                }
+                ;
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+	
+var appsList = new Vue({
+	el:'#appsList',
+	data: {
+		sysUserStudentId: null,
+		name: null,
+		sysProjectId: null,
+		achievement: null,
+        advice: null
+	},
+	methods: {
+		//客户列表
+		getstudentScoreList: function(data,page){
+			var self = this;
+            data.pageNum = page || 1;
+			$.ajax({
+				type: 'post',
+				dataType: 'JSON',
+				data: data,
+				 url: "http://localhost:8031/teacherOperationController/studentScoreList",
+				success: function(result){
+					self.studentScoreList = result.data.list;
+					$("#pagination").empty().createPage({
+                        pageCount: result.data.pages,
+                        current: page,
+                        backFn:function(p){
+                            self.getstudentScoreList(data,p);
+                        }
+                    });
+				}
+			})
+		},
+
+		delet1: function(item){
+			var self = this;
+			self.sysUserStudentId = item.sysUserStudentId;
+			self.getdeleteScore(self.sysUserStudentId);
+		},
+
+getdeleteScore: function(sysUserStudentId){
+			var self = this;
+			$.ajax({
+				type: 'post',
+				data: {
+					sysUserStudentId: sysUserStudentId
+				},
+				url: "http://localhost:8031/teacherOperationController/deleteScore",
+				success:function(result){
+					 alert("OK");
+				}
+			})
+		},
+	},
+
+	created: function(){
+        this.studentScoreList({
+            pageSize: 10,
+        });
+    }
+});
+
+
+</script>
+		<script src="assets/js/jquery.page.min.js"></script>
+		<script src="assets/js/vue.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/typeahead-bs2.min.js"></script>
 		<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -564,6 +501,7 @@
 //      		$('.dialogbody').css({'display':'none'})
 //      	})
 		</script>
+	</div>
 	</body>
 
 </html>

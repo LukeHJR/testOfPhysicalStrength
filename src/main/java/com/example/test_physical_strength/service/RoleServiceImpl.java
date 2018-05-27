@@ -55,6 +55,7 @@ public class RoleServiceImpl implements RoleService {
             UserRes dto = new UserRes();
             dto.setName(sysUser.getName());
             dto.setSid(sysUser.getSid());
+            dto.setId(sysUser.getId().toString());
             SysUserStudentExample example1 = new SysUserStudentExample();
             SysUserStudentExample.Criteria criteria1 = example1.createCriteria();
             criteria1.andSysUserSidEqualTo(sysUser.getSid());
@@ -262,5 +263,10 @@ public class RoleServiceImpl implements RoleService {
             sysUserStudent.setSysClass(request.getSysClass());
             sysUserStudentMapper.updateByExampleSelective(sysUserStudent, example);
         }
+    }
+
+    @Override
+    public void delete(Long id) {
+        sysUserMapper.deleteByPrimaryKey(id);
     }
 }

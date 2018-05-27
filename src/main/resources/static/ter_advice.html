@@ -23,6 +23,7 @@
 
 	<body>
 		<!--头部 Begin-->
+		<div class="content-box" id="appsrcList">
 		<div class="navbar navbar-default" id="navbar">
 			<script type="text/javascript">
 				try {
@@ -56,7 +57,8 @@
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
 									<a href="login.html">
-										<i class="icon-off"></i> 退出
+										<i class="icon-off"></i>                                 <button type="button" onclick="logout()" class="btn btn-default">退出</button>
+
 									</a>
 								</li>
 							</ul>
@@ -198,20 +200,14 @@
 								<!--输入框 Begin-->
 								<form class="form-horizontal" role="form">
 									<div class="form-group">
-										<label class="col-sm-2 control-label no-padding-right" for="form-field-1">班级：</label>
+										<label name="sysClass" id="sysClass" class="col-sm-2 control-label no-padding-right" for="form-field-1">班级：</label>
 
 										<div class="col-sm-2">
 											<input type="text" id="form-field-1" class="col-xs-11 col-sm-11" />
 										</div>
-										
-										<label class="col-sm-2 control-label no-padding-right" for="form-field-1">项目：</label>
 
-										<div class="col-sm-2">
-											<input type="text" id="form-field-1" class="col-xs-11 col-sm-11" />
-										</div>
-										
 										<div class="col-sm-4">
-											<button class="btn btn-white">
+											<button class="btn btn-white" @click="search(sysClass)>
 												查询
 											</button>
 										</div>
@@ -234,75 +230,13 @@
 										</thead>
 										
 										<tbody>
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120802</td>
-												<td class="hidden-480">张三</td>
-												<th class="hidden-480">49</th>
-												<th class="hidden-480">巴拉巴拉</th>
-											</tr>
-
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120802</td>
-												<td class="hidden-480">张三</td>
-												<th class="hidden-480">49</th>
-												<th class="hidden-480">巴拉巴拉</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120802</td>
-												<td class="hidden-480">张三</td>
-												<th class="hidden-480">49</th>
-												<th class="hidden-480">巴拉巴拉</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120802</td>
-												<td class="hidden-480">张三</td>
-												<th class="hidden-480">49</th>
-												<th class="hidden-480">巴拉巴拉</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120802</td>
-												<td class="hidden-480">张三</td>
-												<th class="hidden-480">49</th>
-												<th class="hidden-480">巴拉巴拉</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120802</td>
-												<td class="hidden-480">张三</td>
-												<th class="hidden-480">49</th>
-												<th class="hidden-480">巴拉巴拉</th>
-											</tr>
-											
-											<tr>
-												<td class="center">
-													<a href="#">1</a>
-												</td>
-												<td>14120802</td>
-												<td class="hidden-480">张三</td>
-												<th class="hidden-480">49</th>
-												<th class="hidden-480">巴拉巴拉</th>
-											</tr>
+											<tr v-for="item in studentScoreList">
+											<td>{{(item.sysUserStudentId)}}</td>
+											<td>{{item.name}}</td>
+											<td>{{item.advice}}</td>
+											<td>{{item.achievement}}</td>
+											<td>{{item.sysProjectId}}</td>
+										</tr>
 											
 										</tbody>
 									</table>
@@ -324,6 +258,77 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
 		</script>
+<script type="text/javascript">
+    function logout() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            contentType: "application/json",
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8031/user/logout",//url
+            async: false,
+            success: function (result) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                if (result) {
+                    alert("成功退出！");
+                    window.location.href = "http://localhost:8080/test_physical_strength/src/main/resources/static/login.html";//你可以跟换里面的网址，以便成功后跳转
+                }
+                ;
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    }
+</script>
+
+
+
+<script type="text/javascript">
+	
+var appsrcList = new Vue({
+	el:'#appsrcList',
+	data: {
+		sysUserStudentId: null,
+		name: null,
+		sysProjectId: null,
+		achievement: null,
+        advice: null
+	},
+	methods: {
+		
+
+		search: function(sysClass){
+			var self = this;
+			self.sysClass = sysClass;
+			self.getstudentScoreList1(self.sysClass);
+		},
+
+getstudentScoreList1: function(sysClass){
+			var self = this;
+			$.ajax({
+				type: 'post',
+				data: {
+					sysClass: sysClass
+				},
+				url: "http://localhost:8031/teacherOperationController/getstudentScoreList1",
+				success:function(result){
+					self.studentScoreList = result.data.list;
+					$("#pagination").empty().createPage({
+                        pageCount: result.data.pages,
+                        current: page,
+                        backFn:function(p){
+                            self.getstudentScoreList(data,p);
+                        }
+                    });
+				}
+			})
+		},
+	},
+});
+</script>
+		<script src="assets/js/jquery.page.min.js"></script>
+		<script src="assets/js/vue.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/typeahead-bs2.min.js"></script>
 		<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>

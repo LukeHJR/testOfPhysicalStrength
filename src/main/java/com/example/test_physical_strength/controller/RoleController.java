@@ -53,4 +53,11 @@ public class RoleController {
         roleService.modifyUserInfo(request);
         return ResponseObjectUtil.success();
     }
+
+    @PostMapping("/delete")
+    @ApiOperation(value = "删除")
+    public ResponseObject<Void> delete(Long id) {
+        roleService.delete(id);
+        return ResponseObjectUtil.success();
+    }
 }
